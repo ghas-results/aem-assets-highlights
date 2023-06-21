@@ -1,7 +1,6 @@
 import {
   sampleRUM,
   waitForLCP,
-  decorateBlock,
   buildBlock,
 } from './lib-franklin.js';
 import { decorateMain, toMjml, init } from './functions.js';

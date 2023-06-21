@@ -1,4 +1,4 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
+import { readBlockConfig } from '../../scripts/lib-franklin.js';
 
 /**
  * loads and decorates the footer
@@ -16,6 +16,7 @@ export default async function decorate(block) {
   const footerBlock = new DOMParser().parseFromString(text, 'text/html');
 
   const paragraphs = footerBlock.getElementsByTagName('p');
+  // eslint-disable-next-line no-plusplus
   for (let i = paragraphs.length - 1; i >= 0; i--) {
     const p = paragraphs[i];
     const div = footerBlock.createElement('div');
@@ -38,4 +39,4 @@ export default async function decorate(block) {
         </mj-column>        
     </mj-section>
     `;
-} 
+}

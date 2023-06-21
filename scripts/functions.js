@@ -276,9 +276,10 @@ export async function toMjml(main) {
             return Promise.resolve([`
             <mj-section mj-class="${counter === 1 ? 'mj-first' : ''} mj-content-section">
               <mj-column mj-class="mj-content-column">
-                ${decorateDefaultContent(wrapper,
-              { textClass: 'mj-content-text', imageClass: 'mj-content-image', buttonClass: 'mj-content-button' }
-            )}
+                ${decorateDefaultContent(
+    wrapper,
+    { textClass: 'mj-content-text', imageClass: 'mj-content-image', buttonClass: 'mj-content-button' },
+  )}
               </mj-column>
             </mj-section>
           `]);
@@ -299,8 +300,8 @@ export async function toMjml(main) {
         })));
 
       return [
-        `<mj-wrapper mj-class="mj-content-wrapper ${section.previousElementSibling == null ? 'mj-first' : ''} ${ section.nextElementSibling == null || (section.nextElementSibling && section.nextElementSibling.nextElementSibling == null) ? 'mj-last' : ''}">${sectionBody}</mj-wrapper>`,
-        sectionHead
+        `<mj-wrapper mj-class="mj-content-wrapper ${section.previousElementSibling == null ? 'mj-first' : ''} ${section.nextElementSibling == null || (section.nextElementSibling && section.nextElementSibling.nextElementSibling == null) ? 'mj-last' : ''}">${sectionBody}</mj-wrapper>`,
+        sectionHead,
       ];
     }));
   const styles$ = loadStyles({

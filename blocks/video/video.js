@@ -68,6 +68,5 @@ export default function decorate(block) {
    
     </mj-raw>
     
-  `; 
-
+  `;
 }
