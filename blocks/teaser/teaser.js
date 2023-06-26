@@ -1,14 +1,12 @@
 export default async function decorate(block, window) {
-    const [imgContainer, textContainer] = block.firstElementChild.children;
-    const img = imgContainer.querySelector('img');
-    const buttonContainer = textContainer.querySelector('.button-container');
-    buttonContainer.remove();
+  const [imgContainer, textContainer] = block.firstElementChild.children;
+  const img = imgContainer.querySelector('img');
+  const buttonContainer = textContainer.querySelector('.button-container');
+  buttonContainer.remove();
 
-    const { href: buttonHref } = buttonContainer.firstElementChild;
-    const buttonSrcUrl = new window.URL('/icons/square_right.gif', window.location.href);
+  const buttonSrcUrl = new window.URL('/icons/square_right.gif', window.location.href);
 
-
-    return `
+  return `
         <mj-section mj-class="mj-teaser-section">
             <mj-column mj-class="mj-teaser-image-column">
                 <mj-image src="${img.src}"/>
@@ -28,5 +26,5 @@ export default async function decorate(block, window) {
                 </mj-text>
             </mj-column>
         </mj-section>
-    `
+    `;
 }
