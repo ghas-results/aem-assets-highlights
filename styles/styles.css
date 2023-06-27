@@ -26,3 +26,7 @@ footer {
 iframe {
   border: none;
 }
+
+:root {
+  --inner-bg-color: #fff;
+}
