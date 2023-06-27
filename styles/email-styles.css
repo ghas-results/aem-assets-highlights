@@ -43,8 +43,9 @@ mj-button {
   height: auto;
   min-height: 32px;
   min-width: 72px;
-  padding: 3px 14px 5px;
+  inner-padding: 3px 14px 5px;
 }
+
 
 .mj-content-wrapper {
   background-color: var(--inner-bg-color);
@@ -77,5 +78,6 @@ mj-button {
 :root {
   --outer-bg-color: #eee;
   --inner-bg-color: #fff;
+  --secondary-bg-color: #F5F5F5;
   --primary-action-color: #1473e6;
 }

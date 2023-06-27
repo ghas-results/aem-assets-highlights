@@ -1,10 +1,10 @@
-export default async function decorate(block, window) {
+export default async function decorate(block) {
   const [imgContainer, textContainer] = block.firstElementChild.children;
   const img = imgContainer.querySelector('img');
   const buttonContainer = textContainer.querySelector('.button-container');
   buttonContainer.remove();
 
-  const buttonSrcUrl = new window.URL('/icons/square_right.gif', window.location.href);
+  const { href: buttonHref } = buttonContainer.firstElementChild;
 
   return `
         <mj-section mj-class="mj-teaser-section">
@@ -13,17 +13,9 @@ export default async function decorate(block, window) {
             </mj-column>
             <mj-column mj-class="mj-teaser-text-column">
                 <mj-text mj-class="mj-teaser-text">${textContainer.innerHTML}</mj-text>
-                <mj-text mj-class="mj-teaser-button">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>${buttonContainer.firstElementChild.textContent}</td>
-                                <td width="10px">&nbsp;</td>
-                                <td><img src="${buttonSrcUrl}" width="34" height="34"/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </mj-text>
+                <mj-button mj-class="mj-teaser-button" href="${buttonHref}">
+                    ${buttonContainer.firstElementChild.textContent}
+                </mj-button>
             </mj-column>
         </mj-section>
     `;
