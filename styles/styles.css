@@ -28,5 +28,7 @@ iframe {
 }
 
 :root {
+  --outer-bg-color: #eee;
   --inner-bg-color: #fff;
+  --primary-action-color: #1473e6;
 }
