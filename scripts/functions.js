@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   buildBlock,
   decorateBlocks,
@@ -68,7 +69,6 @@ async function loadBlock(block) {
         try {
           return await blockModule.default(b, window);
         } catch (error) {
-          // eslint-disable-next-line no-console
           console.log(`failed to load module for ${blockName}`, error);
           return null;
         }
@@ -217,7 +217,6 @@ async function loadStyles({ styles, inlineStyles }) {
       }
       return mjml;
     }
-    console.log(`failed to load stylesheet: ${stylesheet}`);
     return '';
   };
   const styles$ = styles
@@ -246,7 +245,10 @@ export function decorateDefaultContent(wrapper, { textClass = '', buttonClass = 
     .reduce((mjml, par) => {
       const img = par.querySelector('img');
       if (img) {
-        return `${mjml}<mj-image mj-class="${imageClass}" src="${img.src}" />`;
+        const isIcon = Array.from(img?.parentElement?.classList || []).includes('icon');
+        if (!isIcon) {
+          return `${mjml}<mj-image mj-class="${imageClass}" src="${img.src}" />`;
+        }
       }
       if (par.matches('.button-container')) {
         const link = par.querySelector(':scope > a');
@@ -340,7 +342,6 @@ function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
   }
 }

@@ -46,6 +46,11 @@ mj-button {
   inner-padding: 3px 14px 5px;
 }
 
+span.icon img {
+  padding: 0 10px;
+  position: relative;
+  top: 4px;
+}
 
 .mj-content-wrapper {
   background-color: var(--inner-bg-color);
