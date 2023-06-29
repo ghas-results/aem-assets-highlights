@@ -394,10 +394,10 @@ function decoratePersonalization(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export async function decorateMain(main) {
   decorateTemplateAndTheme();
   decorateButtons(main);
-  decorateIcons(main);
+  await decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);

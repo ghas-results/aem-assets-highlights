@@ -127,28 +127,39 @@ export function toCamelCase(name) {
 }
 
 /**
+ * @param {Element} span
+ * @param {string} markup
+ */
+function injectIcon(span, markup) {
+  if (markup.match(/<style/i)) {
+    const img = document.createElement('img');
+    img.src = `data:image/svg+xml,${encodeURIComponent(markup)}`;
+    span.appendChild(img);
+  } else {
+    span.innerHTML = markup;
+  }
+}
+
+/**
  * Replace icons with inline SVG and prefix with codeBasePath.
  * @param {Element} element
  */
-export function decorateIcons(element = document) {
-  element.querySelectorAll('span.icon').forEach(async (span) => {
-    if (span.classList.length < 2 || !span.classList[1].startsWith('icon-')) {
-      return;
-    }
-    const icon = span.classList[1].substring(5);
-    // eslint-disable-next-line no-use-before-define
-    const resp = await fetch(`${window.hlx.codeBasePath}/icons/${icon}.svg`);
-    if (resp.ok) {
-      const iconHTML = await resp.text();
-      if (iconHTML.match(/<style/i)) {
-        const img = document.createElement('img');
-        img.src = `data:image/svg+xml,${encodeURIComponent(iconHTML)}`;
-        span.appendChild(img);
+export async function decorateIcons(element = document) {
+  await Promise.all(Array.from(element.querySelectorAll('span.icon')).map(async (span) => {
+    if (span.classList.length >= 2 && span.classList[1].startsWith('icon-')) {
+      const icon = span.classList[1].substring(5);
+      if (sessionStorage.getItem(`icon-${icon}`)) {
+        injectIcon(span, sessionStorage.getItem(`icon-${icon}`));
       } else {
-        span.innerHTML = iconHTML;
+        const resp = await fetch(`${window.hlx.codeBasePath}/icons/${icon}.svg`);
+        if (resp.ok) {
+          const iconHTML = await resp.text();
+          sessionStorage.setItem(`icon-${icon}`, iconHTML);
+          injectIcon(span, iconHTML);
+        }
       }
     }
-  });
+  }));
 }
 
 /**

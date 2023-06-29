@@ -22,7 +22,7 @@ async function loadEager(doc) {
   const footerBlock = buildBlock('footer', '');
   footerDiv.append(footerBlock);
 
-  decorateMain(main);
+  await decorateMain(main);
   await waitForLCP([]);
 
   const html = await toMjml(main, footer);
